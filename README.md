@@ -1,2 +1,2 @@
 # ImageProcessBible
-Experience learn from  Digtal Image Process
+Write down som experience learn from  Digtal Image Process
