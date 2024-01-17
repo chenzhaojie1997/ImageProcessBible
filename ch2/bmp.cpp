@@ -3,7 +3,7 @@
 #include "bmp.h"
 
 // convert bmp Order to normal order
-void BmpOrderToNormal(unsigned char* nrmOrder, unsigned char* bmpOrder, int width, int height) {
+void BmpOrderToNormal(uchar* nrmOrder, uchar* bmpOrder, int width, int height) {
     assert(nrmOrder);
     assert(bmpOrder);
 
@@ -17,7 +17,7 @@ void BmpOrderToNormal(unsigned char* nrmOrder, unsigned char* bmpOrder, int widt
 }
 
 // convert normal order to BMP order
-void NormalOrderToBmp(unsigned char* bmpOrder, unsigned char* nrmOrder, const int width, const int height) {
+void NormalOrderToBmp(uchar* bmpOrder, uchar* nrmOrder, const int width, const int height) {
     assert(bmpOrder);
     assert(nrmOrder);
 
@@ -59,7 +59,7 @@ void InitBmpHead(BmpHeadType* type, BmpHeadSize* size, BmpHeadFix* fix, BmpHeadC
     color->color[1] = 0;
 }
 
-bool WriteBmp(std::string name, unsigned char* data, const int width, const int height) {
+bool WriteBmp(std::string name, uchar* data, const int width, const int height) {
     assert(data);
 
     FILE* p = fopen(name.c_str(), "wb"); // wrtie as binary file
@@ -77,7 +77,7 @@ bool WriteBmp(std::string name, unsigned char* data, const int width, const int 
 
     InitBmpHead(type, size, fix, color, width, height);
     
-    unsigned char* bmpOrder = new unsigned char[width * height * 3];
+    uchar* bmpOrder = new uchar[width * height * 3];
     assert(bmpOrder);
     NormalOrderToBmp(bmpOrder, data, width, height);
 
@@ -88,16 +88,16 @@ bool WriteBmp(std::string name, unsigned char* data, const int width, const int 
     fwrite(bmpOrder, 1, height * width * 3, p);
     fclose(p);
 
-    delete type;
-    delete size;
-    delete fix;
-    delete color;
+    free(type);
+    free(size);
+    free(fix);
+    free(color);
     delete[] bmpOrder;
 
     return true;
 }
 
-bool ReadBmp(std::string name, unsigned char* data, const int width, const int height) {
+bool ReadBmp(std::string name, uchar* data, const int width, const int height) {
     assert(data);
     assert(width % 4 == 0);
 
@@ -115,7 +115,7 @@ bool ReadBmp(std::string name, unsigned char* data, const int width, const int h
 
     // read bmp
     fseek(p, 54, SEEK_SET);
-    unsigned char* bmpOrder = (unsigned char*)malloc(width * height * 3);
+    uchar* bmpOrder = (uchar*)malloc(width * height * 3);
     assert(bmpOrder);
     for (int i = 0; i < width * height * 3; ++i) {
         fread(bmpOrder + i, 1, 1, p);

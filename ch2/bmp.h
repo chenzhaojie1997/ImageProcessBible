@@ -2,6 +2,8 @@
 #define _BMP_H_
 #include <string>
 
+typedef unsigned char uchar;
+
 class BmpHeadType {
 public:
     char bmpType[2]; // alaways 'B' 'M'
@@ -32,8 +34,8 @@ public:
     int color[2];
 };
 
-bool ReadBmp(std::string name, unsigned char* data, const int width, const int height);
-bool WriteBmp(std::string name, unsigned char* data, const int width, const int height);
+bool ReadBmp(std::string name, uchar* data, const int width, const int height);
+bool WriteBmp(std::string name, uchar* data, const int width, const int height);
 void InitBmpHead(BmpHeadType* type, BmpHeadSize* size, BmpHeadFix* fix, BmpHeadColor* color, const int width, const int height);
 
 #endif
