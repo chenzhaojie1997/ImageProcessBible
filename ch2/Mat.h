@@ -24,7 +24,21 @@ public:
     CMat();
     CMat(int width, int height, int channel);
 
+    // split data into channels
+    void SplitChannels();
+
+    // read bmp in data and channels
     CMat(std::string name, int width, int height, int channel);
 
+    // write data as bmp
+    void WriteData(std::string name);
+
+    // merge channel into data
+    void MergeChannelsIntoData();
+
+    // write channels as bmp
+    void WriteChannels(std::string name);
+
     ~CMat();
+
 };
