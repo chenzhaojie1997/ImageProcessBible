@@ -2,11 +2,19 @@
 #include <cassert>
 #include <iostream>
 #include "Mat.h"
+#include "alg.h"
 
 int main() {
     CMat* p = new CMat("people.bmp", 1024, 1023, 3);
-    memset(p->data, 0, p->width * p->height * p->channel);
-    p->MergeChannelsIntoData();
-    p->WriteData("p0.bmp");
+
+    CMat* np = new CMat(4096, 4096, 3);
+    for (int c = 0; c < 3; ++c) {
+        BilinerInterpolate(np->chnls[c], np->width, np->height, 
+                            p->chnls[c],  p->width,  p->height);
+    }
+    np->MergeChannelsIntoData();
+
+    np->WriteData("p0.bmp");
+
     return 0;
 }

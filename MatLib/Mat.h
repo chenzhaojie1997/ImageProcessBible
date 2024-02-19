@@ -1,3 +1,5 @@
+#ifndef MAT_H
+#define MAT_H
 #include <string>
 
 typedef unsigned char uchar;
@@ -42,3 +44,5 @@ public:
     ~CMat();
 
 };
+
+#endif
