@@ -9,12 +9,12 @@ int main() {
 
     CMat* np = new CMat(4096, 4096, 3);
     for (int c = 0; c < 3; ++c) {
-        BilinerInterpolate(np->chnls[c], np->width, np->height, 
+        MyInterpolate(np->chnls[c], np->width, np->height, 
                             p->chnls[c],  p->width,  p->height);
     }
     np->MergeChannelsIntoData();
 
-    np->WriteData("p0.bmp");
+    np->WriteData("p1.bmp");
 
     return 0;
 }
